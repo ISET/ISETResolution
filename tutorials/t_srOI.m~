@@ -48,23 +48,13 @@ wave = oiGet(oi, 'wave');
 xyzValue = ieReadSpectra('XYZQuanta.mat', wave);
 xyzfilter = xyzValue / max(max(max(xyzValue)));
 
-sensorNF = sensorSet(sensor, 'noise flag', -1);
+sensorNF = sensorSet(sensorNF, 'noise flag', -1);
 xyzImgNFOI = sensorComputeFullArray(sensorNF, oi, xyzfilter);
 xyzImgNFIOI = sensorComputeFullArray(sensorNF, oiIdeal, xyzfilter);
 
 %%
-srgbImgOI = xyz2srgb(xyzImgNFOI);
-srgbImgIOI = xyz2srgb(xyzImgNFIOI);
+srgbImgOI = xyzsrgb(xyzImgNFOI);
+srgbImgIOI = xyzsrgb(xyzImgNFIOI);
 
 vcNewGraphWin; 
 subplot(1, 2, 1); imshow(srgbImgOI);
-subplot(1, 2, 2); imshow(srgbImgIOI);
-
-%%
-rect = [9, 111, 20, 20];
-OICrop = imcrop(srgbImgOI, rect);
-IOICrop = imcrop(srgbImgIOI, rect);
-
-vcNewGraphWin; 
-subplot(1, 2, 1); imshow(OICrop);
-subplot(1, 2, 2); imshow(IOICrop);
