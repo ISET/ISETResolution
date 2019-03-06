@@ -17,13 +17,13 @@ recipe = piRead(inFile);
 sceneName = 'landscape';
 %/scratch/zhenglyu/renderedScene/
 outFile = fullfile('/scratch','zhenglu','renderedScene', ...
-                    sceneName,'landscapeTest.pbrt');
+                    sceneName,'landscape_v1.pbrt');
 recipe.set('outputFile',outFile);
 %% Set up the render quality
 
 % There are many different parameters that can be set.
-recipe.set('film resolution',[600 600]);
-recipe.set('pixel samples',64);
+recipe.set('film resolution',[4096 2304]);
+recipe.set('pixel samples',1024);
 recipe.set('max depth',1); % Number of bounces
 
 %% Render
@@ -40,6 +40,6 @@ scene = sceneSet(scene,'gamma',0.5);
 scenePlot(scene,'depth map');
 %%
 outScene = fullfile('/scratch','zhenglu','renderedScene', ...
-                    sceneName,'landscapeTest.m');
+                    sceneName,'landscapeTest_v1.m');
 save(outScene, scene);
 %% END
